@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Avoid the Coins</title>
+    <link rel="stylesheet" href="css_project_1/project1.css"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="container" id="startScreen">
+    <button class="btnSS" id="instructionsBtn">Instructions</button>
+    <button class="btnSS">Music On/Off</button>
+    <button class="btnSS">Start Game</button>
+</div>
+<div class="container" id="instructions">
+    <button id="closeBtn1">x</button>
+    <h1>Instructions</h1>
+    <div id="instructionText">
+        Your cursor is your wallet.<br>
+        Dog coins will drop from the top. These are coins you do not want AT ALL.<br>
+        Let these Dog coins pass (don't let your wallet touch them), and they will earn you points when they hit the bins at the bottom<br>
+        <br>
+        Other coins are power-ups.
+    </div>
+</div>
+<div class="container" id="gameScreen">
+    <div id="topPanel">
+        <div>LIVES:</div>
+        <div>SCORE:</div>
+        <div>Level:</div>
+        <button #closeBtn2>Exit</button>
+    </div>
+    <div id="gameArea">
+        <div id="coinGenerator">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div id="binsRow">
+            <div class="bin"></div>
+            <div class="bin"></div>
+            <div class="bin"></div>
+            <div class="bin"></div>
+            <div class="bin"></div>
+        </div>
+    </div>
+</div>
+<script src="javscript_project_1/project1.js"></script>
+</body>
+</html>
