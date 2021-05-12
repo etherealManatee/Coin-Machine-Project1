@@ -6,6 +6,11 @@ body {
   width: 100vw;
   background-color: white;
   font-family: "Pangolin", cursive;
+  box-sizing: border-box;
+}
+
+* {
+  cursor: url("../images/cursor.cur"), auto;
 }
 
 .container {
@@ -15,9 +20,9 @@ body {
 }
 
 #startScreen {
-  background-image: url("/AvoidTheThings/images/background1.jpeg");
+  background-image: url("../images/background1.jpeg");
   background-size: cover;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -37,6 +42,60 @@ body {
 }
 #instructions #closeBtn1 {
   background-color: fuchsia;
+}
+
+#gameScreen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#gameScreen #topPanel {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  height: 30px;
+  border: 1px solid black;
+}
+#gameScreen #topPanel .panelStuff {
+  display: flex;
+}
+#gameScreen #gameArea {
+  height: 570px;
+  display: grid;
+  grid-template-rows: 64px 442px 64px;
+  border: 1px solid black;
+  background-color: lightgrey;
+}
+#gameScreen #gameArea #coinGenerator {
+  grid-row-start: 1;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: cadetblue;
+}
+#gameScreen #gameArea #coinGenerator .dogCoin {
+  position: relative;
+  top: -20px;
+  animation: drop 5s infinite linear;
+}
+#gameScreen #gameArea #coinGenerator .dogCoin img {
+  width: 64px;
+  height: auto;
+}
+@keyframes drop {
+  0% {
+    top: -20px;
+  }
+  100% {
+    top: 400px;
+  }
+}
+#gameScreen #gameArea #binsRow {
+  grid-row-start: 3;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  background-color: grey;
 }
 
 /*# sourceMappingURL=project1.css.map */

@@ -14,7 +14,7 @@
 <div class="container" id="startScreen">
     <button class="btnSS" id="instructionsBtn">Instructions</button>
     <button class="btnSS">Music On/Off</button>
-    <button class="btnSS">Start Game</button>
+    <button class="btnSS" id="startGame">Start Game</button>
 </div>
 <div class="container" id="instructions">
     <button id="closeBtn1">x</button>
@@ -29,25 +29,73 @@
 </div>
 <div class="container" id="gameScreen">
     <div id="topPanel">
-        <div>LIVES:</div>
-        <div>SCORE:</div>
-        <div>Level:</div>
-        <button #closeBtn2>Exit</button>
+        <div class="panelStuff" id="lives">
+            <div>LIVES:</div>
+            <div>3</div>
+        </div>
+        <div class="panelStuff">
+            <div>SCORE:</div>
+            <div id="score">0</div>
+        </div>
+        <div class="panelStuff" id="level">
+            <div>Level:</div>
+            <div>1</div>
+        </div>
+        <button id="closeBtn2">Exit</button>
     </div>
     <div id="gameArea">
         <div id="coinGenerator">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin1">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin2">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin3">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin4">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin5">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin6">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
+            <div>
+                <img src="images/atm.png" alt="atm"/>
+                <div class="dogCoin" id="coin7">
+                    <img src="images/dogcoin.png" alt="dogcoin"/>
+                </div>
+            </div>
         </div>
         <div id="binsRow">
-            <div class="bin"></div>
-            <div class="bin"></div>
-            <div class="bin"></div>
-            <div class="bin"></div>
-            <div class="bin"></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
+            <div class="bin"><img src="images/bin.png" alt="bin"/></div>
         </div>
     </div>
 </div>

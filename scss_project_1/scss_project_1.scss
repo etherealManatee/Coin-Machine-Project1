@@ -6,8 +6,11 @@ body{
   width: 100vw;
   background-color: white;
   font-family: 'Pangolin', cursive;
+  box-sizing: border-box;
 }
-
+*{
+  cursor: url("../images/cursor.cur"), auto;
+}
 .container{
   margin: 0;
   height: 600px;
@@ -15,9 +18,9 @@ body{
 }
 
 #startScreen{
-  background-image: url("/AvoidTheThings/images/background1.jpeg");
+  background-image: url("../images/background1.jpeg");
   background-size: cover;
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -38,3 +41,57 @@ body{
   background-color: fuchsia;
   }
 }
+
+#gameScreen{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  #topPanel{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 30px;
+    border: 1px solid black;
+    .panelStuff{
+      display: flex;
+    }
+  }
+  #gameArea{
+    height: 570px;
+    display: grid;
+    grid-template-rows: 64px 442px 64px;
+    border: 1px solid black;
+    background-color: lightgrey;
+    #coinGenerator{
+      grid-row-start: 1;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      background-color: cadetblue;
+      .dogCoin{
+        position: relative;
+        top: -20px;
+        animation: drop 5s infinite linear;
+      }
+      .dogCoin img{
+        width: 64px;
+        height: auto;
+      }
+    }
+    @keyframes drop {
+      0%{top:-20px}
+      100%{top:400px}
+    }
+    
+    #binsRow{
+      grid-row-start: 3;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-evenly;
+      background-color: grey;
+      .bin{
+      }
+    }
+  }
+}
+
