@@ -3,8 +3,8 @@ body{
   justify-content: center;
   align-items: center;
   height: 100vh;
-  width: 100vw;
-  background-color: white;
+  width: auto;
+  background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
   font-family: 'Pangolin', cursive;
   box-sizing: border-box;
 }
@@ -17,10 +17,10 @@ body{
   width: 500px;
 }
 
-#startScreen{
+#openingScreen{
   background-image: url("../images/background1.jpeg");
   background-size: cover;
-  display: none;
+  display: flex;
   justify-content: center;
   align-items: flex-end;
   flex-wrap: wrap;
@@ -29,6 +29,9 @@ body{
     height: 100px;
     width: 220px;
     border-radius: 50%;
+  }
+  #instructionsBtn:hover{
+    cursor: pointer;
   }
 }
 
@@ -43,7 +46,7 @@ body{
 }
 
 #gameScreen{
-  display: flex;
+  display: none;
   flex-direction: column;
   justify-content: center;
   #topPanel{
@@ -62,28 +65,56 @@ body{
     grid-template-rows: 64px 442px 64px;
     border: 1px solid black;
     background-color: lightgrey;
+    /* The Modal (background) */
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgb(0,0,0); /* Fallback color */
+      background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+      .modal-content {
+        background-color: ivory;
+        margin: 15% auto; /* 15% from the top and centered */
+        padding: 20px;
+        border: 1px solid #888;
+        width: 400px; /* Could be more or less, depending on screen size */
+      }
+      /* The Action Button */
+      .action {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+      }
+    }
     #coinGenerator{
       grid-row-start: 1;
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       background-color: cadetblue;
-      .dogCoin{
-        position: relative;
-        top: -20px;
-        animation: drop 5s infinite linear;
-      }
+    }
+    #coinArea{
+      grid-row-start: 2;
+      background-color: lightgrey;
+      height: 442px;
+      display: grid;
+      gap: 5px;
+      grid-template-columns: repeat(7, 1fr);
+      position: relative;
       .dogCoin img{
         width: 64px;
         height: auto;
       }
     }
-    @keyframes drop {
-      0%{top:-20px}
-      100%{top:400px}
-    }
     
     #binsRow{
+      position: relative;
       grid-row-start: 3;
       display: flex;
       flex-direction: row;
@@ -94,4 +125,38 @@ body{
     }
   }
 }
+//
+///* The Modal (background) */
+//.modal {
+//  display: none; /* Hidden by default */
+//  position: fixed; /* Stay in place */
+//  z-index: 1; /* Sit on top */
+//  left: 0;
+//  top: 0;
+//  width: 100%; /* Full width */
+//  height: 100%; /* Full height */
+//  overflow: auto; /* Enable scroll if needed */
+//  background-color: rgb(0,0,0); /* Fallback color */
+//  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+//  .modal-content {
+//    background-color: ivory;
+//    margin: 15% auto; /* 15% from the top and centered */
+//    padding: 20px;
+//    border: 1px solid #888;
+//    width: 400px; /* Could be more or less, depending on screen size */
+//  }
+//  /* The Close Button */
+//  .playAgain {
+//    color: #aaa;
+//    float: right;
+//    font-size: 28px;
+//    font-weight: bold;
+//  }
+//}
 
+//.close:hover,
+//.close:focus {
+//  color: black;
+//  text-decoration: none;
+//  cursor: pointer;
+//}

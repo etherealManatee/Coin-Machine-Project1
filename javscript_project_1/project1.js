@@ -1,73 +1,255 @@
 //function to show instructions and close start screen
 function showInstructions(){
     let instructionPage = document.querySelector("#instructions")
-    let startScreen = document.querySelector("#startScreen")
+    let openingScreen = document.querySelector("#openingScreen")
     instructionPage.style.display = "flex"
-    startScreen.style.display = "none"
+    openingScreen.style.display = "none"
 }
-//show instructions when clicked
+//eventlistener to show instructions when clicked
 document.querySelector("#instructionsBtn").addEventListener('click', showInstructions)
-
-//function to close instruction page and go back to start screen
+//function to go back to openingscreen and close instruction page
 function closeButton(){
     let instructionPage = document.querySelector("#instructions")
-    let startScreen = document.querySelector("#startScreen")
+    let openingScreen = document.querySelector("#openingScreen")
     instructionPage.style.display = "none"
-    startScreen.style.display = "flex"
+    openingScreen.style.display = "flex"
 }
-//close instructions and go back to start screen when clicked
+//close instructions and go back to initial screen when clicked
 document.querySelector("#closeBtn1").addEventListener('click',closeButton)
 
-//function to close start screen and enter game screen
+//function to enter game screen and close opening screen
 function showGameScreen(){
     let gamePage = document.querySelector("#gameScreen")
-    let startScreen = document.querySelector("#startScreen")
+    let openingScreen = document.querySelector("#openingScreen")
+    let startModal = document.querySelector('#modalStartGame')
     gamePage.style.display = "grid"
-    startScreen.style.display = "none"
+    openingScreen.style.display = "none"
+    startModal.style.display = "block"
 }
-//close start screen and open game screen when clicked
-document.querySelector("#startGame").addEventListener('click',showGameScreen)
+//event listener to enter game screen and close openingscreen
+document.querySelector("#enterGame").addEventListener('click',showGameScreen)
 
 //function for closing the game screen and going back to start screen
 function closeButton2(){
     let gamePage = document.querySelector('#gameScreen')
-    let startScreen = document.querySelector("#startScreen")
+    let openingScreen = document.querySelector("#openingScreen")
     gamePage.style.display = "none"
-    startScreen.style.display = "flex"
+    openingScreen.style.display = "flex"
 }
 //close game screen and open start screen when clicked
 document.querySelector("#closeBtn2").addEventListener('click',closeButton2)
 
-//where the score, lives and level are stored
 let state = {
     score: 0,
     lives: 3,
     level: 1
 }
+//function for the game
+function gameStart(){
+    //function to close modal
+    closeModal()
+    function closeModal(){
+        document.querySelector('#modalStartGame').style.display = 'none'
+        document.querySelector('#modalGameOver').style.display = 'none'
+    }
+    //function for the generation of coins and for the mouseover event to deduct lives
+    function coinGen(){
+        let randomNum = Math.floor((Math.random() * 7) + 1)
+        let positionContainer = document.querySelector("#coin" + randomNum) //this is where you will spawn the coin
+        let divContainer = document.createElement('div') //this is the container for the coin
+        let imgTag = document.createElement('img') //this is for the image inside
+        imgTag.setAttribute('src', "images/dogcoin.png") //setting image to the created img element
+        divContainer.classList.add("dogCoin") //setting class to the created div element
+        divContainer.appendChild(imgTag)
+        positionContainer.insertAdjacentElement('afterbegin', divContainer)
+        divContainer.style.position = 'absolute'
+        divContainer.style.top = "0px";
+        fallingCoin(divContainer)
+        document.querySelectorAll(".dogCoin").forEach(function (e) {
+            e.addEventListener('mouseenter', minusLife)
+        })
+    }
+    //function used in coinGen for making the coin move
+    function fallingCoin(coin, pos= 0){
+        coin.style.position = "absolute"
+        setInterval(()=> {
+            pos = pos + 1
+            coin.style.top = pos+"px"
+        },1)
+    }
+    //function used in coinGen for deducting life
+    function minusLife(){
+        console.log('-1 life')
+        state.lives -= 1
+        console.log(state.lives)
+        document.querySelector('#lives').textContent = state.lives
+    }
 
-//function for deducting life when mouse hits the dropping coin
-function dead(){
-    console.log('-1 life')
-    let randomNum = Math.floor((Math.random()*7)+1)
-    console.log(randomNum)
+    //score tracking and removal of that particular element-coin
+    function coinRemovalAndScoring(){
+        let coin = document.querySelectorAll(".dogCoin") //selecting of the coins from the class dogCoin
+        coin.forEach(function(e){
+            let coinTop = parseInt(window.getComputedStyle(e).getPropertyValue("top"))
+            if (coinTop > 380){ //if coinTop more we add one to score and we remove the coin entirely
+                state.score += 1
+                document.querySelector('#score').textContent = state.score
+                e.remove()
+            }
+        })
+    }
+
+    //function for when lives become zero
+    function zeroLives(){
+        if (state.lives < 1){
+            clearInterval(coinRemoveAndScoring)
+            clearInterval(coinGen1)
+            let coin = document.querySelectorAll(".dogCoin")
+            coin.forEach(function(e) {
+                e.remove()
+            })
+            let gameOver = document.querySelector('#modalGameOver') //modal opens when game ends
+            gameOver.style.display = "block"
+        }
+    }
+    // setInterval(coinRemovalAndScoring,1)
+    // setInterval(coinGen,500)
+    let coinRemoveAndScoring = setInterval(coinRemovalAndScoring,1)
+    let coinGen1 = setInterval(coinGen,300)
+    setInterval(zeroLives,1)
 }
 
-//
-document.querySelectorAll(".dogCoin").forEach(function(e){
-    e.addEventListener('mouseover',dead)
-})
+//event listener to start game from start game modal
+document.querySelector('#startGame').addEventListener('click', gameStart)
+document.querySelector('#playAgain').addEventListener('click', playAgain)
 
-//point tracking
-setInterval(function(){
-    let coin = document.querySelectorAll(".dogCoin")
-    let binT = document.querySelector("#binsRow")
-    coin.forEach(function(e){
-        let coinBottom = parseInt(window.getComputedStyle(e).getPropertyValue("bottom"))
-        //console.log(window.getComputedStyle(binT).getPropertyValue("top"))
-        let binTop = parseInt(window.getComputedStyle(binT).getPropertyValue("top"))
-        if(binTop>coinBottom){
-            state.score += 1
-            document.querySelector('#score').textContent = state.score
-        }
-    })
-},1000)
+//function to reset the state
+function resetState(){
+    state.score = 0
+    state.lives = 3
+    state.level = 1
+    document.querySelector('#score').textContent = state.score
+    document.querySelector('#lives').textContent = state.lives
+    document.querySelector('#level').textContent = state.level
+}
+//function to combine resetState and gameStart
+function playAgain(){
+    resetState()
+    gameStart()
+}
+
+//function for deducting life when mouse hits the dropping coin
+// function minusLife(){
+//     console.log('-1 life')
+//     state.lives -= 1
+//     console.log(state.lives)
+//     document.querySelector('#lives').textContent = state.lives
+// }
+
+//function for the generation of coins we do not want to collect
+// function coinGen(){
+//     let randomNum = Math.floor((Math.random() * 7) + 1)
+//     let positionContainer = document.querySelector("#coin" + randomNum) //this is where you will spawn the coin
+//     let divContainer = document.createElement('div') //this is the container for the coin
+//     let imgTag = document.createElement('img') //this is for the image inside
+//     imgTag.setAttribute('src', "images/dogcoin.png") //setting image to the created img element
+//     divContainer.classList.add("dogCoin") //setting class to the created div element
+//     divContainer.appendChild(imgTag)
+//     positionContainer.insertAdjacentElement('afterbegin', divContainer)
+//     divContainer.style.position = 'absolute'
+//     divContainer.style.top = "0px";
+//     fallingCoin(divContainer)
+//     document.querySelectorAll(".dogCoin").forEach(function (e) {
+//         e.addEventListener('mouseenter', minusLife)
+//     })
+// }
+
+// //point tracking and removal of that particular element-coin
+// function coinRemovalAndScoring(){
+//     let coin = document.querySelectorAll(".dogCoin") //selecting of the coins from the class dogCoin
+//     coin.forEach(function(e){
+//         let coinTop = parseInt(window.getComputedStyle(e).getPropertyValue("top"))
+//         if (coinTop > 380){ //if coinTop more we add one to score and we remove the coin entirely
+//             state.score += 1
+//             document.querySelector('#score').textContent = state.score
+//             e.remove()
+//         }
+//     })
+// }
+// //setting the setInterval to check for when the coin has reached the bottom
+// let scoreAndCoin = setInterval(coinRemovalAndScoring,1)
+//
+// // function to drop a random coin, let's try every half second
+// let coinGeneration = setInterval(coinGen,500)
+
+// function fallingCoin(coin, pos= 0){
+//     coin.style.position = "absolute"
+//     setInterval(()=> {
+//         pos = pos + 1
+//         coin.style.top = pos+"px"
+//     },5)
+// }
+
+
+//function for when lives become zero
+// function zeroLives(){
+//     if (state.lives < 1){
+//         clearInterval(coinRemoveAndScoring)
+//         clearInterval(coinGen1)
+//         let coin = document.querySelectorAll(".dogCoin")
+//         coin.forEach(function(e) {
+//             e.remove()
+//         })
+//         let modal = document.querySelector('#modalGameOver') //modal opens when game ends
+//         modal.style.display = "block"
+//     }
+// }
+//interval for when lives become zero
+// setInterval(function(){
+//     if(state.lives < 1){
+//         scoreAndCoin = null
+//         coinGeneration = null
+//         let coin = document.querySelectorAll(".dogCoin")
+//         coin.forEach(function(e) {
+//             e.remove()
+//         })
+//         let modal = document.querySelector('#modalGameOver') //modal opens when game ends
+//         modal.style.display = "block"
+//     }
+// }, 1)
+
+
+// Get the <span> element that closes the modal
+// let span = document.querySelector('.playAgain');
+// let modal = document.querySelector('#modalGameOver')
+
+// When the user clicks on the button, open the modal
+
+// When the user clicks on <span> (Play Again?), close the modal and restart game
+// span.onclick = function() {
+//     modal.style.display = "none";
+//     state.scores = 0
+//     state.lives = 3
+//     document.querySelector('#score').textContent = state.score
+//     document.querySelector('#lives').textContent = state.lives
+//     gameStart()
+// }
+
+// When the user clicks anywhere outside of the modal, close it
+// window.onclick = function(event) {
+//     if (event.target == modal) {
+//         modal.style.display = "none";
+//     }
+// }
+
+function what(){
+    let test1 = 0
+    function test(){
+        test1 += 1
+        console.log(test1)
+    }
+    let testing = setInterval(test,1000)
+    setTimeout(function(){
+        clearInterval(testing)
+    },5000)
+}
+what()

@@ -11,10 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="container" id="startScreen">
+<div class="container" id="openingScreen">
     <button class="btnSS" id="instructionsBtn">Instructions</button>
     <button class="btnSS">Music On/Off</button>
-    <button class="btnSS" id="startGame">Start Game</button>
+    <button class="btnSS" id="enterGame">Start Game</button>
 </div>
 <div class="container" id="instructions">
     <button id="closeBtn1">x</button>
@@ -29,63 +29,77 @@
 </div>
 <div class="container" id="gameScreen">
     <div id="topPanel">
-        <div class="panelStuff" id="lives">
+        <div class="panelStuff">
             <div>LIVES:</div>
-            <div>3</div>
+            <div id="lives">3</div>
         </div>
         <div class="panelStuff">
             <div>SCORE:</div>
             <div id="score">0</div>
         </div>
-        <div class="panelStuff" id="level">
+        <div class="panelStuff">
             <div>Level:</div>
-            <div>1</div>
+            <div id="level">1</div>
         </div>
         <button id="closeBtn2">Exit</button>
     </div>
     <div id="gameArea">
+        <div id="modalStartGame" class="modal">
+            <div class="modal-content">
+                <span class="action" id="startGame">Start Game</span>
+                <p>click 'Start Game' to start</p>
+            </div>
+        </div>
+        <div id="modalGameOver" class="modal">
+            <div class="modal-content">
+                <span class="action" id="playAgain">Play Again?</span>
+                <p>GAME OVER</p>
+            </div>
+        </div>
         <div id="coinGenerator">
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin1">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
             </div>
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin2">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
             </div>
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin3">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
             </div>
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin4">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
             </div>
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin5">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
             </div>
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin6">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
             </div>
             <div>
                 <img src="images/atm.png" alt="atm"/>
-                <div class="dogCoin" id="coin7">
-                    <img src="images/dogcoin.png" alt="dogcoin"/>
-                </div>
+            </div>
+        </div>
+        <div id="coinArea">
+            <div>
+                <div class="coin" id="coin1"></div>
+            </div>
+            <div>
+                <div class="coin" id="coin2"></div>
+            </div>
+            <div>
+                <div class="coin" id="coin3"></div>
+            </div>
+            <div>
+                <div class="coin" id="coin4"></div>
+            </div>
+            <div>
+                <div class="coin" id="coin5"></div>
+            </div>
+            <div>
+                <div class="coin" id="coin6"></div>
+            </div>
+            <div>
+                <div class="coin" id="coin7"></div>
             </div>
         </div>
         <div id="binsRow">
@@ -99,6 +113,7 @@
         </div>
     </div>
 </div>
+
 <script src="javscript_project_1/project1.js"></script>
 </body>
 </html>
