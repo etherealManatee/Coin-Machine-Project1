@@ -9,11 +9,15 @@
     <link rel="stylesheet" href="css_project_1/project1.css"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Pangolin&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Nova+Flat&display=swap" rel="stylesheet">
 </head>
 <body>
+<audio id="backgroundMusic" src="audio/cryptomaniac.mp3" autoplay></audio>
 <div class="container" id="openingScreen">
+    <div id="gameTitle">COIN MACHINE</div>
     <button class="btnSS" id="instructionsBtn">Instructions</button>
-    <button class="btnSS">Music On/Off</button>
+    <button class="btnSS" id="music">Music On/Off</button>
     <button class="btnSS" id="enterGame">Start Game</button>
 </div>
 <div class="container" id="instructions">
@@ -28,6 +32,8 @@
     </div>
 </div>
 <div class="container" id="gameScreen">
+    <audio id="audioLoseLife" src="audio/fart.mp3" autoplay="false"></audio>
+    <audio id="audioBonus" src="audio/kaching.mp3" autoplay="false"></audio>
     <div id="topPanel">
         <div class="panelStuff">
             <div>LIVES:</div>

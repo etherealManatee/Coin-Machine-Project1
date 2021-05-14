@@ -54,20 +54,38 @@ function gameStart(){
     }
     //function for the generation of coins and for the mouseover event to deduct lives
     function coinGen(){
-        let randomNum = Math.floor((Math.random() * 7) + 1)
-        let positionContainer = document.querySelector("#coin" + randomNum) //this is where you will spawn the coin
-        let divContainer = document.createElement('div') //this is the container for the coin
-        let imgTag = document.createElement('img') //this is for the image inside
-        imgTag.setAttribute('src', "images/dogcoin.png") //setting image to the created img element
-        divContainer.classList.add("dogCoin") //setting class to the created div element
-        divContainer.appendChild(imgTag)
-        positionContainer.insertAdjacentElement('afterbegin', divContainer)
-        divContainer.style.position = 'absolute'
-        divContainer.style.top = "0px";
-        fallingCoin(divContainer)
-        document.querySelectorAll(".dogCoin").forEach(function (e) {
-            e.addEventListener('mouseenter', minusLife)
-        })
+        let randNum = Math.floor((Math.random() * 10) + 1)
+        if (randNum === 1){
+            let randomNum = Math.floor((Math.random() * 7) + 1)
+            let positionContainer = document.querySelector("#coin" + randomNum) //this is where you will spawn the coin
+            let divContainer = document.createElement('div') //this is the container for the coin
+            let imgTag = document.createElement('img') //this is for the image inside
+            imgTag.setAttribute('src', "images/bonuscoin.png") //setting image to the created img element
+            divContainer.classList.add("bonusCoin1") //setting class to the created div element
+            divContainer.appendChild(imgTag)
+            positionContainer.insertAdjacentElement('afterbegin', divContainer)
+            divContainer.style.position = 'absolute'
+            divContainer.style.top = "0px";
+            fallingCoin(divContainer)
+            document.querySelectorAll(".bonusCoin1").forEach(function (e) {
+                e.addEventListener('mouseenter', bonusCoin1)
+            })
+        } else {
+            let randomNum = Math.floor((Math.random() * 7) + 1)
+            let positionContainer = document.querySelector("#coin" + randomNum) //this is where you will spawn the coin
+            let divContainer = document.createElement('div') //this is the container for the coin
+            let imgTag = document.createElement('img') //this is for the image inside
+            imgTag.setAttribute('src', "images/dogcoin.png") //setting image to the created img element
+            divContainer.classList.add("dogCoin") //setting class to the created div element
+            divContainer.appendChild(imgTag)
+            positionContainer.insertAdjacentElement('afterbegin', divContainer)
+            divContainer.style.position = 'absolute'
+            divContainer.style.top = "0px";
+            fallingCoin(divContainer)
+            document.querySelectorAll(".dogCoin").forEach(function (e) {
+                e.addEventListener('mouseenter', minusLife)
+            })
+        }
     }
     //function used in coinGen for making the coin move
     function fallingCoin(coin, pos= 0){
@@ -75,10 +93,19 @@ function gameStart(){
         setInterval(()=> {
             pos = pos + 1
             coin.style.top = pos+"px"
-        },1)
+        },2)
     }
+    //function for bonusCoin1
+    function bonusCoin1(e){
+        document.querySelector('#audioBonus').play()
+        console.log('whoa')
+        state.score += 10
+        e.target.remove()
+    }
+
     //function used in coinGen for deducting life
     function minusLife(){
+        document.querySelector("#audioLoseLife").play()
         console.log('-1 life')
         state.lives -= 1
         console.log(state.lives)
@@ -89,6 +116,15 @@ function gameStart(){
     function coinRemovalAndScoring(){
         let coin = document.querySelectorAll(".dogCoin") //selecting of the coins from the class dogCoin
         coin.forEach(function(e){
+            let coinTop = parseInt(window.getComputedStyle(e).getPropertyValue("top"))
+            if (coinTop > 380){ //if coinTop more we add one to score and we remove the coin entirely
+                state.score += 1
+                document.querySelector('#score').textContent = state.score
+                e.remove()
+            }
+        })
+        let coin1 = document.querySelectorAll(".bonusCoin1") //selecting of the coins from the class dogCoin
+        coin1.forEach(function(e){
             let coinTop = parseInt(window.getComputedStyle(e).getPropertyValue("top"))
             if (coinTop > 380){ //if coinTop more we add one to score and we remove the coin entirely
                 state.score += 1
@@ -136,6 +172,8 @@ function playAgain(){
     resetState()
     gameStart()
 }
+
+//for background music
 
 //function for deducting life when mouse hits the dropping coin
 // function minusLife(){
@@ -240,16 +278,3 @@ function playAgain(){
 //         modal.style.display = "none";
 //     }
 // }
-
-function what(){
-    let test1 = 0
-    function test(){
-        test1 += 1
-        console.log(test1)
-    }
-    let testing = setInterval(test,1000)
-    setTimeout(function(){
-        clearInterval(testing)
-    },5000)
-}
-what()

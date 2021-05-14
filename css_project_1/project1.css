@@ -7,25 +7,31 @@ body {
   background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
   font-family: "Pangolin", cursive;
   box-sizing: border-box;
-}
-
-* {
-  cursor: url("../images/cursor.cur"), auto;
+  cursor: none;
 }
 
 .container {
+  cursor: url("../images/cursor.cur"), auto;
   margin: 0;
   height: 600px;
   width: 500px;
 }
 
 #openingScreen {
+  cursor: url("../images/cursor.cur"), auto;
   background-image: url("../images/background1.jpeg");
   background-size: cover;
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: flex-end;
-  flex-wrap: wrap;
+  align-items: center;
+}
+#openingScreen #gameTitle {
+  font-family: "Nova Flat", cursive;
+  font-size: 100px;
+  color: black;
+  text-align: center;
+  text-shadow: blueviolet 2px 2px 10px;
 }
 #openingScreen .btnSS {
   font-family: inherit;
@@ -38,6 +44,7 @@ body {
 }
 
 #instructions {
+  cursor: url("../images/cursor.cur"), auto;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -48,6 +55,7 @@ body {
 }
 
 #gameScreen {
+  cursor: url("../images/cursor.cur"), auto;
   display: none;
   flex-direction: column;
   justify-content: center;
@@ -124,6 +132,10 @@ body {
 }
 #gameScreen #gameArea #coinArea .dogCoin img {
   width: 64px;
+  height: auto;
+}
+#gameScreen #gameArea #coinArea .bonusCoin1 img {
+  width: 60px;
   height: auto;
 }
 #gameScreen #gameArea #binsRow {
